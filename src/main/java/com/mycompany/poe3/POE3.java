@@ -75,8 +75,9 @@ private static QuickChat chatObj = new QuickChat();
         boolean isLogin = loginObj.login(enteredUsername, enteredPassword);
         if(isLogin){
             
-            JOptionPane.showMessageDialog(null, "Hi hi" + loginObj.getFirstname() + "" + loginObj.getLastname() + " Welcome to the QuickChat app!");
+            JOptionPane.showMessageDialog(null, "Hi hi " + loginObj.getFirstname() + "" + loginObj.getLastname() + " Welcome to the QuickChat app!");
             QuickChat chatObj = new QuickChat();
+            chatObj.startChat(0);
             
         }else{
             JOptionPane.showMessageDialog(null, "Your username or Password is incorrect, please check your credentials and try again sweets");
@@ -94,7 +95,7 @@ private static QuickChat chatObj = new QuickChat();
             switch (choice){
                 case 1: 
                     numberOfMessages++;
-                    JOptionPane.showMessageDialog(null, "Hello World!", "+2782678167", numberOfMessages);
+                    JOptionPane.showMessageDialog(null, "Welcome to QuickChat", "+2782678167", numberOfMessages);
                     break;
                 case 2:
                     break;
@@ -104,7 +105,7 @@ private static QuickChat chatObj = new QuickChat();
                 default:
             }//end of switch
         }//end of while 
-         int number = Integer.parseInt(JOptionPane.showInputDialog("Enter number of messages the user must enter: "));
+         int number = Integer.parseInt(JOptionPane.showInputDialog("Enter number of messages you would like to send: "));
         //use number to instantiate the message Object
         array_methods messageObject = new array_methods(number);
         //Input messages into the message Object
