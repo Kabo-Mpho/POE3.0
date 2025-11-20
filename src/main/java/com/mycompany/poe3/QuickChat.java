@@ -35,9 +35,9 @@ public class QuickChat {
     int choice = 0;
     while (choice !=3){
         String menu = "___QuickChat menu___\n"
-                + "1. Send a message"
-                + "2. Show recently sent messages"
-                +  "3. Exit"
+                + "1. Send a message\n"
+                + "2. Show recently sent messages\n"
+                + "3. Exit\n"
                 +  "Please choose an option";
         
         String userChoice = JOptionPane.showInputDialog(menu);
@@ -60,7 +60,7 @@ public class QuickChat {
                 
             case 3:
                 JOptionPane.showMessageDialog(null, "Exiting the QuickChat App. Bye bye!");
-                break;
+                return;
                 
             default:
                 JOptionPane.showMessageDialog(null, "Invalid entry, please try again.");
@@ -68,29 +68,38 @@ public class QuickChat {
     }
 }
     private void sendMessages(int messageLimit, int totalMessagesSent){
+       
         for (int i = 0; i < messageLimit; i++){
             long messageID = generateMessageID();
             totalMessageSent++;
             
+
             String recipient = JOptionPane.showInputDialog("Please enter the recipients phone number *+27........*: ");
             if(recipient == null)return;
-            if(!recipient.startsWith("+") || recipient.length() > 13){
-                JOptionPane.showMessageDialog(null, "Then recipient number that you entered is invalid. Please make sure it includes *+27.........*");
-                i--;
-                continue;
+            if(!recipient.startsWith("+27") || recipient.length() != 12){
+                JOptionPane.showMessageDialog(null, "The recipient number that you entered is invalid. Please make sure it includes *+27.........*");
+                return;
+                
             }
             
-            String message = JOptionPane.showInputDialog("Enter message (a maximum of 250 characters)");
+            String message = JOptionPane.showInputDialog("Enter message (a maximum of 250 characters): ");
             if (message == null) return;
             if(message.length() > 250) {
                 JOptionPane.showMessageDialog(null, "Please enter less than 250 characters.");
-                i--;
-                continue;
+                return;
+               
             }
-            String action = JOptionPane.showInputDialog("Please select an option");
-            System.out.println("1. send a message");
-            System.out.println("2. Ignore the message");
-            System.out.println("Store the message to send it later");
+            
+            //send message
+            totalMessageSent++;
+            JOptionPane.showMessageDialog(null, "Message has been sent to " + recipient);
+            
+            
+            String action = JOptionPane.showInputDialog("Please select an option\n" 
+            + "1. send a message\n"
+            + "2. Ignore the message\n"
+            + "3. Store the message to send it later");
+            
             
             if (action == null)return;
             int act;
@@ -98,20 +107,20 @@ public class QuickChat {
                 act = Integer.parseInt(action);
             }catch(NumberFormatException e){
                 JOptionPane.showMessageDialog(null, "Your input is invalid, please try again");
-                i--;
-                continue;
+               return;
             }
             if (act == 2){
                 JOptionPane.showMessageDialog(null, "Your message has been disregarded.");
-                continue;
+               return;
             }
             String messageHash = generateMessageHash(messageID, totalMessagesSent, message);
-            String info = "___Message Details___";
-            System.out.println("Message ID: %d");
-            System.out.println("Message Count: %d");
-            System.out.println("Recipient: %s");
-            System.out.println("Message: %s");
-            System.out.println("Message Hash: %s");
+            String info = "___Message Details___\n" 
+                    + "Message ID: %d\n"
+                    + "Message Count: %d\n"
+                    + "Recipient: %s\n"
+                    + "Message: %s\n"
+                    + "Message Hash: %s\n";
+           
            
             
             if (act == 3){
